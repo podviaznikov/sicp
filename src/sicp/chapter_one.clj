@@ -28,4 +28,47 @@
 (max-two-out-of-three 2 1 3)
 
 
+
+
+
 ; Exercise 1.3. Done.
+
+
+; Exercise 1.8.
+; Newton’s method for cube roots.
+
+(defn abs [x]
+  (if (< x 0)
+    (* -1 x)
+    x))
+
+(defn cube [x] (* x x x))
+
+(defn good-enough? [guess original]
+  (< (abs (- (cube guess) original)) 0.001))
+
+
+
+(defn new-guess [guess original]
+  (/ (+ (/ original (square guess))
+        (* 2 guess)
+      3)))
+
+(defn cubert-iteration [guess original]
+  (if (good-enough? guess original)
+    guess
+    (cubert-iteration (new-guess guess original) original)))
+
+
+
+(defn cubert [x]
+  (cubert-iteration 3 x))
+
+
+;(good-enough? 1 9)
+
+
+;(cubert 2)
+
+
+
